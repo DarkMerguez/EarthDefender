@@ -14,7 +14,11 @@ export class Player extends GameObject {
     }
     protected update(): void {
 
-        if (this.getPosition().x < this.getGame().CANVAS_WIDTH - this.getImage().width || this.getPosition().x > 0 + this.getImage().width) {
+        if (
+            (Input.getAxisX() == -1 && this.getPosition().x != 0)
+            ||
+            (Input.getAxisX() == 1 && this.getPosition().x < (this.getGame().CANVAS_WIDTH - (this.getImage().width)))
+        ) {
             this.setPosition({
                 x: this.getPosition().x += this.speed * Input.getAxisX(),
                 y: this.getPosition().y

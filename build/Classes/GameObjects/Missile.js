@@ -31,10 +31,14 @@ var Missile = /** @class */ (function (_super) {
         });
     };
     Missile.prototype.update = function () {
-        this.setPosition({
-            x: this.getPosition().x += this.speed * Input.getAxisX(),
-            y: this.getPosition().y > 0 ? this.getPosition().y + this.speed * Input.getAxisY() : this.getGame().CANVAS_HEIGHT - this.getImage().height - 10
-        });
+        if ((Input.getAxisX() == -1 && this.getPosition().x != 0)
+            ||
+                (Input.getAxisX() == 1 && this.getPosition().x < (this.getGame().CANVAS_WIDTH - (this.getImage().width)))) {
+            this.setPosition({
+                x: this.getPosition().x += this.speed * Input.getAxisX(),
+                y: this.getPosition().y > 0 ? this.getPosition().y + this.speed * Input.getAxisY() : this.getGame().CANVAS_HEIGHT - this.getImage().height - 10
+            });
+        }
     };
     ;
     return Missile;
